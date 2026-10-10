@@ -1,0 +1,19 @@
+,,auc,auc,f1,f1,mae,mae
+,,mean,std,mean,std,mean,std
+held_out_port,model,,,,,,
+Chennai,logreg,0.862,0.085,0.698,0.151,,
+Chennai,rf_clf,0.835,0.089,0.62,0.136,,
+Chennai,rf_reg,0.861,0.072,0.699,0.124,2.497,0.197
+Chennai,ridge,0.875,0.07,0.751,0.101,2.466,0.166
+Mundra,logreg,0.884,0.025,0.686,0.045,,
+Mundra,rf_clf,0.886,0.042,0.716,0.04,,
+Mundra,rf_reg,0.893,0.05,0.72,0.061,2.294,0.289
+Mundra,ridge,0.895,0.019,0.696,0.03,2.205,0.153
+Nhava Sheva,logreg,0.893,0.046,0.703,0.054,,
+Nhava Sheva,rf_clf,0.892,0.031,0.701,0.064,,
+Nhava Sheva,rf_reg,0.899,0.029,0.725,0.047,2.136,0.083
+Nhava Sheva,ridge,0.901,0.046,0.723,0.071,2.085,0.098
+Visakhapatnam,logreg,0.898,0.047,0.778,0.044,,
+Visakhapatnam,rf_clf,0.888,0.019,0.636,0.053,,
+Visakhapatnam,rf_reg,0.89,0.023,0.711,0.047,2.442,0.351
+Visakhapatnam,ridge,0.898,0.054,0.794,0.026,2.291,0.407

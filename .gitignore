@@ -1,7 +1,14 @@
-.venv/
+# Python
 __pycache__/
-*.py[cod]
-.streamlit/
+*.pyc
+.venv/
+venv/
+
+# Editors / OS
+.vscode/
+.idea/
+.ipynb_checkpoints/
 .DS_Store
-data/*.csv
-reports/figures/*.png
+
+# Trained models (rebuild with: python src/train.py)
+models/

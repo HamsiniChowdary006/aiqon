@@ -23,6 +23,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.model_selection import TimeSeriesSplit
 
 from evaluate import clf_metrics, reg_metrics, plot_confusion, plot_calibration
+from data_generation import generate
 
 ROOT = Path(__file__).resolve().parents[1]
 NUMERIC = ["hour", "day_of_week", "month", "berth_capacity", "queue_length", "incoming_24h",
@@ -89,7 +90,13 @@ def build_calibrated(name, seed=0):
 
 
 def main():
-    df = prepare(pd.read_csv(ROOT / "data" / "port_congestion_400.csv"))
+    for folder in ["data", "models", "results", "results/figures"]:
+        (ROOT / folder).mkdir(parents=True, exist_ok=True)
+    csv = ROOT / "data" / "port_congestion_400.csv"
+    if not csv.exists():                       # rebuild dataset if the CSV is missing
+        generate().to_csv(csv, index=False)
+        print("Dataset not found, generated", csv)
+    df = prepare(pd.read_csv(csv))
     train, test = time_split(df)
     print(f"Train {len(train)} rows ({train.arrival_time.min().date()} to {train.arrival_time.max().date()}) | "
           f"Test {len(test)} rows ({test.arrival_time.min().date()} to {test.arrival_time.max().date()})")
@@ -110,11 +117,9 @@ def main():
 
     res = pd.DataFrame(rows).set_index("model").round(3)
     print(res.to_string())
-    (ROOT / "results").mkdir(exist_ok=True)
     res.to_csv(ROOT / "results" / "final_metrics.csv")
 
     fig = ROOT / "results" / "figures"
-    fig.mkdir(parents=True, exist_ok=True)
     plot_confusion(test[TARGET_CLF], probs["rf_clf_calibrated"], fig / "confusion_rf_calibrated.png",
                    "RF (calibrated), test set")
     plot_calibration({k: (test[TARGET_CLF], v) for k, v in probs.items()}, fig / "final_calibration.png")
