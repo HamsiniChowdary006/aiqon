@@ -2,7 +2,6 @@
 
 Predicts the likelihood that a vessel will wait more than 12 hours before berthing, gives a confidence level, explains the key factors in plain English, and maps the risk to an operational action.
 
-Built for the Aiqon AI Internship take-home assignment. **Full method, results and discussion are in the technical report: [`report/report.pdf`](report/report.pdf).**
 
 > **Note:** all results come from a **synthetic dataset** with known rules. They show how the methods behave on that simulation, not performance on real port or AIS data.
 
