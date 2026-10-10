@@ -91,6 +91,20 @@ def _phrase(feature, row):
     return PHRASES[feature](row)
 
 
+# Features whose state has a known direction (night/weekend/monsoon raise delay, per the simulation).
+# A single-row SHAP value can occasionally disagree (noise); we skip phrases that would read as contradictory.
+_RISK_STATE = {"hour": "is_night", "is_night": "is_night", "day_of_week": "is_weekend",
+               "is_weekend": "is_weekend", "month": "is_monsoon", "is_monsoon": "is_monsoon"}
+
+
+def _contradicts(feature, row, pushes_up):
+    flag = _RISK_STATE.get(feature)
+    if flag is None:
+        return False
+    risky_state = bool(row[flag])
+    return (pushes_up and not risky_state) or (not pushes_up and risky_state)
+
+
 def _join(parts):
     return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
 
@@ -105,10 +119,10 @@ def explain(top_k=3, min_effect=0.01, **raw):
     sv, names = _shap_values(X)
     contrib = pd.Series(sv[0], index=names).sort_values()
 
-    def pick(series):
+    def pick(series, pushes_up):
         out = []
         for feat, val in series.items():
-            if abs(val) < min_effect:
+            if abs(val) < min_effect or _contradicts(feat, row, pushes_up):
                 continue
             text = _phrase(feat, row)
             if text not in out:
@@ -117,8 +131,8 @@ def explain(top_k=3, min_effect=0.01, **raw):
                 break
         return out
 
-    up = pick(contrib[::-1][contrib[::-1] > 0])      # pushes risk up
-    down = [d for d in pick(contrib[contrib < 0]) if d not in up]   # pushes risk down
+    up = pick(contrib[::-1][contrib[::-1] > 0], True)      # pushes risk up
+    down = [d for d in pick(contrib[contrib < 0], False) if d not in up]   # pushes risk down
     head = f"{band.capitalize()} risk ({p:.0%}, {conf.lower()} confidence): "
     if band == "LOW":
         sentence = head + (f"{_join(down)}." if down else "no major risk drivers.")

@@ -3,7 +3,7 @@ High risk (90%, high confidence): strong winds are expected (33 km/h), 17 vessel
 Actions: Reroute to an alternate port or slow-steam to delay arrival; Alert the consignee and customs broker about a likely delay; Rebook trucking / rail slots to a later window
 
 [MEDIUM example] actual delay 7.8 h (congested=0)
-Medium risk (53%, low confidence): strong winds are expected (28 km/h), the port's recent average delay is 12.8 h and arrival is on a weekend. Mitigating: it is outside monsoon season, queue is 1 vessels against 4 berths and 3 vessels are due within 24h for 4 berths.
+Medium risk (53%, low confidence): strong winds are expected (28 km/h), the port's recent average delay is 12.8 h and arrival is on a weekend. Mitigating: it is outside monsoon season, queue is 1 vessel against 4 berths and 3 vessels are due within 24h for 4 berths.
 Actions: Confidence is low: verify live queue and weather data before acting; Monitor queue and weather updates every few hours; Keep buffer time in the downstream schedule; Pre-clear documents so berthing is not delayed further
 
 [LOW example] actual delay 4.0 h (congested=0)
