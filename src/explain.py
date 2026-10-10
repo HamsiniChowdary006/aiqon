@@ -55,13 +55,20 @@ def _f(v, fmt="{:.0f}"):
     return "n/a" if pd.isna(v) else fmt.format(v)
 
 
+def _vessels(v):
+    """'1 vessel' / '5 vessels' / 'an unknown number of vessels'."""
+    if pd.isna(v):
+        return "an unknown number of vessels"
+    return f"{int(v)} vessel" + ("" if int(v) == 1 else "s")
+
+
 # feature -> text describing the ACTUAL state of the shipment
 PHRASES = {
-    "util": lambda r: f"queue is {_f(r.queue_length)} vessels against {int(r.berth_capacity)} berths",
-    "queue_length": lambda r: f"queue is {_f(r.queue_length)} vessels against {int(r.berth_capacity)} berths",
+    "util": lambda r: f"queue is {_vessels(r.queue_length)} against {int(r.berth_capacity)} berths",
+    "queue_length": lambda r: f"queue is {_vessels(r.queue_length)} against {int(r.berth_capacity)} berths",
     "berth_capacity": lambda r: f"the port has {int(r.berth_capacity)} berths",
-    "incoming_ratio": lambda r: f"{int(r.incoming_24h)} vessels are due within 24h for {int(r.berth_capacity)} berths",
-    "incoming_24h": lambda r: f"{int(r.incoming_24h)} vessels are due within 24h for {int(r.berth_capacity)} berths",
+    "incoming_ratio": lambda r: f"{_vessels(r.incoming_24h)} {'is' if int(r.incoming_24h) == 1 else 'are'} due within 24h for {int(r.berth_capacity)} berths",
+    "incoming_24h": lambda r: f"{_vessels(r.incoming_24h)} {'is' if int(r.incoming_24h) == 1 else 'are'} due within 24h for {int(r.berth_capacity)} berths",
     "wind_speed_kmh": lambda r: (f"strong winds are expected ({_f(r.wind_speed_kmh)} km/h)"
                                  if r.wind_speed_kmh > 25 else f"winds are mild ({_f(r.wind_speed_kmh)} km/h)"),
     "rain_mm_hr": lambda r: (f"heavy rain is expected ({r.rain_mm_hr:.1f} mm/h)"
