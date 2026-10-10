@@ -26,9 +26,11 @@ from evaluate import clf_metrics, reg_metrics, plot_confusion, plot_calibration
 from data_generation import generate
 
 ROOT = Path(__file__).resolve().parents[1]
-NUMERIC = ["hour", "day_of_week", "month", "berth_capacity", "queue_length", "incoming_24h",
+NUMERIC = ["hour", "day_of_week", "berth_capacity", "queue_length", "incoming_24h",
            "wind_speed_kmh", "rain_mm_hr", "vessel_size_teu", "recent_avg_delay_hrs",
            "util", "incoming_ratio", "is_night", "is_weekend", "is_monsoon"]
+# "month" is deliberately NOT a feature: in a time-based split the test months are unseen,
+# so the model would use it as a time proxy. is_monsoon carries the seasonal signal instead.
 CATEGORICAL = ["port"]
 FEATURES = NUMERIC + CATEGORICAL
 TARGET_CLF, TARGET_REG = "congested", "delay_hours"

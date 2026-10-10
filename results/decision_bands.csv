@@ -1,0 +1,4 @@
+band,shipments,actual_congestion_rate,avg_predicted,share_of_shipments
+HIGH,10,0.7,0.788,0.083
+MEDIUM,25,0.6,0.532,0.208
+LOW,85,0.118,0.158,0.708

@@ -1,7 +1,7 @@
 ,,brier,brier,auc,auc,f1,f1
 ,,mean,std,mean,std,mean,std
 model,version,,,,,,
-logreg,calibrated,0.145,0.016,0.859,0.04,0.539,0.111
-logreg,uncalibrated,0.141,0.029,0.865,0.036,0.573,0.05
-rf_clf,calibrated,0.14,0.011,0.859,0.031,0.583,0.071
-rf_clf,uncalibrated,0.149,0.015,0.847,0.038,0.64,0.027
+logreg,calibrated,0.142,0.011,0.857,0.036,0.546,0.08
+logreg,uncalibrated,0.127,0.02,0.865,0.034,0.617,0.033
+rf_clf,calibrated,0.139,0.013,0.853,0.032,0.56,0.079
+rf_clf,uncalibrated,0.133,0.017,0.864,0.034,0.612,0.049

@@ -1,19 +1,19 @@
 ,,auc,auc,f1,f1,mae,mae
 ,,mean,std,mean,std,mean,std
 held_out_port,model,,,,,,
-Chennai,logreg,0.862,0.085,0.698,0.151,,
-Chennai,rf_clf,0.835,0.089,0.62,0.136,,
-Chennai,rf_reg,0.861,0.072,0.699,0.124,2.497,0.197
-Chennai,ridge,0.875,0.07,0.751,0.101,2.466,0.166
-Mundra,logreg,0.884,0.025,0.686,0.045,,
-Mundra,rf_clf,0.886,0.042,0.716,0.04,,
-Mundra,rf_reg,0.893,0.05,0.72,0.061,2.294,0.289
-Mundra,ridge,0.895,0.019,0.696,0.03,2.205,0.153
-Nhava Sheva,logreg,0.893,0.046,0.703,0.054,,
-Nhava Sheva,rf_clf,0.892,0.031,0.701,0.064,,
-Nhava Sheva,rf_reg,0.899,0.029,0.725,0.047,2.136,0.083
-Nhava Sheva,ridge,0.901,0.046,0.723,0.071,2.085,0.098
-Visakhapatnam,logreg,0.898,0.047,0.778,0.044,,
-Visakhapatnam,rf_clf,0.888,0.019,0.636,0.053,,
-Visakhapatnam,rf_reg,0.89,0.023,0.711,0.047,2.442,0.351
-Visakhapatnam,ridge,0.898,0.054,0.794,0.026,2.291,0.407
+Chennai,logreg,0.86,0.084,0.695,0.15,,
+Chennai,rf_clf,0.837,0.081,0.639,0.082,,
+Chennai,rf_reg,0.864,0.07,0.718,0.096,2.489,0.2
+Chennai,ridge,0.876,0.067,0.763,0.092,2.461,0.173
+Mundra,logreg,0.883,0.026,0.678,0.044,,
+Mundra,rf_clf,0.886,0.04,0.716,0.037,,
+Mundra,rf_reg,0.894,0.049,0.72,0.061,2.291,0.293
+Mundra,ridge,0.893,0.02,0.689,0.035,2.213,0.157
+Nhava Sheva,logreg,0.893,0.043,0.705,0.07,,
+Nhava Sheva,rf_clf,0.892,0.032,0.679,0.024,,
+Nhava Sheva,rf_reg,0.9,0.027,0.708,0.048,2.137,0.086
+Nhava Sheva,ridge,0.9,0.044,0.722,0.068,2.086,0.092
+Visakhapatnam,logreg,0.904,0.043,0.788,0.045,,
+Visakhapatnam,rf_clf,0.896,0.023,0.644,0.064,,
+Visakhapatnam,rf_reg,0.89,0.025,0.695,0.047,2.446,0.346
+Visakhapatnam,ridge,0.899,0.051,0.794,0.026,2.259,0.41
