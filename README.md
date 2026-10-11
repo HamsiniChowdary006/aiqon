@@ -2,7 +2,6 @@
 
 Predicts the likelihood that a vessel will wait more than 12 hours before berthing, gives a confidence level, explains the key factors in plain English, and maps the risk to an operational action.
 
-
 > **Note:** all results come from a **synthetic dataset** with known rules. They show how the methods behave on that simulation, not performance on real port or AIS data.
 
 ## Overview
@@ -27,30 +26,47 @@ Decision bands: **above 70%** reroute or slow-steam, alert the consignee, rebook
 
 ## Quick start
 
-Run from the project root (tested on Python 3.13, Windows).
+Tested on Python 3.13 (Windows). Run from the project folder.
+
+### Option A: one command (recommended)
 
 ```bash
-pip install -r requirements.txt
-
-python src/data_generation.py   # data/port_congestion_400.csv
-python src/train.py             # models/ + results/final_metrics.csv
-python src/experiments.py       # test bed -> results/
-python src/decision.py          # risk-band table
-python src/explain.py           # SHAP importance + example explanations
-python src/eda.py               # exploratory figures
-
-streamlit run app.py            # demo at http://localhost:8501
+python run_demo.py
 ```
 
-- For the demo you only need the first three steps.
+This installs any missing packages, generates the dataset and trains the models if they do not exist yet, then opens the demo at http://localhost:8501. Press `Ctrl+C` to stop.
+
+```bash
+python run_demo.py --all       # also reproduce every result (test bed, risk bands, SHAP, EDA), then open the demo
+python run_demo.py --retrain   # rebuild the models
+python run_demo.py --no-app    # run the setup/analysis steps without starting the demo
+```
+
+### Option B: step by step
+
+| Step | Command | Needed for | What it does |
+|---|---|---|---|
+| 1 | `pip install -r requirements.txt` | Demo | Installs the packages |
+| 2 | `python src/data_generation.py` | Demo | Creates `data/port_congestion_400.csv` |
+| 3 | `python src/train.py` | Demo | Trains and saves the models in `models/` |
+| 4 | `streamlit run app.py` | Demo | Opens the demo at http://localhost:8501 |
+| 5 | `python src/experiments.py` | Results only | Runs the test bed (T1 to T7) into `results/` |
+| 6 | `python src/decision.py` | Results only | Risk-band table |
+| 7 | `python src/explain.py` | Results only | SHAP importance and example explanations |
+| 8 | `python src/eda.py` | Results only | Exploratory figures |
+
+**To run the demo, do steps 1 to 4. Steps 5 to 8 are only needed to reproduce the results and figures.**
+
 - If `streamlit` is not recognised on Windows, use `python -m streamlit run app.py`.
-- `models/` is not committed, so run `python src/train.py` after cloning.
+- If Streamlit asks for an email on first run, press Enter.
+- `models/` is not committed, so it must be built (step 3, or Option A) after cloning.
 - Seeds are fixed, so reruns reproduce the same numbers.
 
 ## Repository structure
 
 ```
 port-congestion/
+├── run_demo.py            # one-command launcher
 ├── app.py                 # Streamlit demo
 ├── requirements.txt
 ├── data/                  # synthetic dataset (generated)
@@ -95,5 +111,5 @@ See the report for assumptions and what would change with real AIS data.
 | Problem | Fix |
 |---|---|
 | App says "Trained models not found" | Run `python src/train.py`, then reload |
-| `ModuleNotFoundError` | Run `pip install -r requirements.txt` |
+| `ModuleNotFoundError` | Run `python run_demo.py` (it installs missing packages) or `pip install -r requirements.txt` |
 | `streamlit` not recognised | Use `python -m streamlit run app.py` |
